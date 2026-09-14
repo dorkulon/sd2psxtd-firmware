@@ -70,7 +70,7 @@ static inline void cmd_reader_program_init(PIO pio, uint sm, uint offset) {
     sm_config_set_in_shift(&c, true, true, 8);
     sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_RX);
 
-    sm_config_set_clkdiv_int_frac(&c, 1, 1);
+    sm_config_set_clkdiv_int_frac(&c, 1, 0x00);
 
     pio_sm_init(pio, sm, offset, &c);
 }
@@ -87,7 +87,7 @@ static inline void controller_program_init(PIO pio, uint sm, uint offset) {
     sm_config_set_in_shift(&c, true, true, 8);
     sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_RX);
 
-    sm_config_set_clkdiv_int_frac(&c, 1, 1);
+    sm_config_set_clkdiv_int_frac(&c, 1, 0x00);
 
     pio_sm_init(pio, sm, offset, &c);
 }
@@ -111,7 +111,7 @@ static inline void dat_writer_program_init(PIO pio, uint sm, uint offset) {
     sm_config_set_out_shift(&c, true, true, 8);
     sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_TX);
 
-    sm_config_set_clkdiv_int_frac(&c, 1, 1);
+    sm_config_set_clkdiv_int_frac(&c, 1, 0x00);
 
     pio_sm_init(pio, sm, offset, &c);
 }
