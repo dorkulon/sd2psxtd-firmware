@@ -68,10 +68,10 @@ extern "C" void sd_init() {
 
             if (sd.sdErrorCode()) {
                 fatal(ERR_SDCARD, "failed to mount the card\nSdError: 0x%02X,0x%02X\ncheck the card\n%s", sd.sdErrorCode(), sd.sdErrorData(), text);
-            } else if (!sd.fatType()) {
-                fatal(ERR_SDCARD, "failed to mount the card\ncheck the card is formatted correctly");
+            } else if (sd.initErrorCode() == static_cast<uint8_t>(FsVolume::FsInitError::CorruptPartitionTable)) {
+                fatal(ERR_SDCARD, "failed to mount the card\nPartition table is corrupt or invalid\n%s", text);
             } else {
-                fatal(ERR_SDCARD, "failed to mount the card\nUNKNOWN\n%s", text);
+                fatal(ERR_SDCARD, "failed to mount the card\nNo supported FAT/exFAT filesystem found\ncheck the card is formatted correctly\n%s", text);
             }
         }
         initialized = true;
